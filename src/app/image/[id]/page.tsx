@@ -17,24 +17,24 @@ export default async function ImagePage({ params }: PageProps<"/image/[id]">) {
   const related = getRelatedImages(item.id);
 
   return (
-    <main className="min-h-screen bg-white text-black">
+    <main className="min-h-screen bg-neutral-950 text-neutral-100">
       <SiteHeader compact />
       <section className="mx-auto grid max-w-7xl gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[minmax(0,1.15fr)_0.85fr]">
         <div>
           <PlaceholderImage item={item} className="min-h-[520px]" />
         </div>
 
-        <aside className="border-2 border-black bg-neutral-100 p-5">
-          <p className="mb-3 inline-flex bg-yellow-400 px-2 py-1 text-xs font-black uppercase">
+        <aside className="border-2 border-neutral-700 bg-neutral-900 p-5">
+          <p className="mb-3 inline-flex bg-yellow-400 px-2 py-1 text-xs font-black uppercase text-black">
             {item.category}
           </p>
           <h1 className="text-4xl font-black leading-none sm:text-5xl">
             {item.title}
           </h1>
-          <p className="mt-3 text-lg font-bold text-neutral-700">
+          <p className="mt-3 text-lg font-bold text-neutral-400">
             by {item.creator}
           </p>
-          <p className="mt-5 font-semibold leading-8 text-neutral-700">
+          <p className="mt-5 font-semibold leading-8 text-neutral-300">
             {item.description}
           </p>
 
@@ -44,12 +44,12 @@ export default async function ImagePage({ params }: PageProps<"/image/[id]">) {
           </div>
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <button className="border-2 border-black bg-black px-5 py-4 text-sm font-black uppercase text-white hover:bg-yellow-400 hover:text-black">
+            <button className="border-2 border-yellow-400 bg-yellow-400 px-5 py-4 text-sm font-black uppercase text-black hover:bg-neutral-950 hover:text-yellow-300">
               Save Image
             </button>
             <Link
               href="/explore"
-              className="border-2 border-black bg-white px-5 py-4 text-center text-sm font-black uppercase hover:bg-neutral-100"
+              className="border-2 border-neutral-700 bg-neutral-950 px-5 py-4 text-center text-sm font-black uppercase text-neutral-100 hover:border-yellow-400"
             >
               Back to Explore
             </Link>
@@ -59,7 +59,7 @@ export default async function ImagePage({ params }: PageProps<"/image/[id]">) {
             {item.tags.map((tag) => (
               <span
                 key={tag}
-                className="border-2 border-black bg-white px-3 py-2 text-xs font-black uppercase"
+                className="border-2 border-neutral-700 bg-neutral-950 px-3 py-2 text-xs font-black uppercase text-neutral-100"
               >
                 {tag}
               </span>
@@ -69,7 +69,7 @@ export default async function ImagePage({ params }: PageProps<"/image/[id]">) {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 pb-10 sm:px-6">
-        <div className="mb-5 border-t-2 border-black pt-6">
+        <div className="mb-5 border-t-2 border-neutral-700 pt-6">
           <h2 className="text-3xl font-black uppercase">More like this</h2>
         </div>
         <MasonryGrid items={related} />

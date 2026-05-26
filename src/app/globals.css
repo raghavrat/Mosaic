@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #0a0a0a;
+  --background: #0a0a0a;
+  --foreground: #f5f5f5;
 }
 
 @theme inline {
@@ -30,16 +30,16 @@ a {
 }
 
 .box-link {
-  border: 2px solid #000000;
-  background: #ffffff;
+  border: 2px solid #f5f5f5;
+  background: #0a0a0a;
   padding: 0.5rem 0.75rem;
-  color: #000000;
+  color: #f5f5f5;
   transition:
     background-color 150ms ease,
     color 150ms ease;
 }
 
 .box-link:hover {
-  background: #000000;
-  color: #fde047;
+  background: #facc15;
+  color: #000000;
 }

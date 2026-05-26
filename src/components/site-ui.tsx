@@ -20,11 +20,11 @@ export function MosaicLogo({ className = "" }: { className?: string }) {
 
 export function SiteHeader({ compact = false }: { compact?: boolean }) {
   return (
-    <header className="sticky top-0 z-30 border-b-2 border-black bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-30 border-b-2 border-neutral-700 bg-neutral-950/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-6">
         <Link
           href="/"
-          className="flex size-11 shrink-0 items-center justify-center border-2 border-black bg-white text-black transition hover:bg-yellow-400"
+          className="flex size-11 shrink-0 items-center justify-center border-2 border-neutral-100 bg-neutral-950 text-neutral-100 transition hover:bg-yellow-400 hover:text-black"
           aria-label="Mosaic home"
         >
           <MosaicLogo className="size-8" />
@@ -40,7 +40,7 @@ export function SiteHeader({ compact = false }: { compact?: boolean }) {
         {!compact ? (
           <Link
             href="/search"
-            className="ml-auto hidden min-w-0 flex-1 items-center border-2 border-black bg-neutral-100 px-4 py-3 text-sm font-semibold text-neutral-500 md:flex"
+            className="ml-auto hidden min-w-0 flex-1 items-center border-2 border-neutral-700 bg-neutral-900 px-4 py-3 text-sm font-semibold text-neutral-400 md:flex"
           >
             Search visual references
           </Link>
@@ -49,7 +49,7 @@ export function SiteHeader({ compact = false }: { compact?: boolean }) {
         )}
         <Link
           href="/login"
-          className="border-2 border-black bg-yellow-400 px-4 py-2 text-sm font-black uppercase text-black transition hover:bg-black hover:text-yellow-300"
+          className="border-2 border-yellow-400 bg-yellow-400 px-4 py-2 text-sm font-black uppercase text-black transition hover:bg-neutral-950 hover:text-yellow-300"
         >
           Login
         </Link>
@@ -65,10 +65,10 @@ export function TopicChips({ active = "Editorial" }: { active?: string }) {
         <Link
           key={topic}
           href={`/search?topic=${topic.toLowerCase()}`}
-          className={`shrink-0 border-2 border-black px-4 py-2 text-sm font-black uppercase ${
+          className={`shrink-0 border-2 px-4 py-2 text-sm font-black uppercase ${
             topic === active
-              ? "bg-yellow-400 text-black"
-              : "bg-white text-black hover:bg-neutral-100"
+              ? "border-yellow-400 bg-yellow-400 text-black"
+              : "border-neutral-700 bg-neutral-950 text-neutral-100 hover:border-yellow-400 hover:bg-neutral-900"
           }`}
         >
           {topic}
@@ -87,19 +87,19 @@ export function PlaceholderImage({
 }) {
   return (
     <div
-      className={`relative overflow-hidden border-2 border-black ${item.aspect} ${className}`}
+      className={`relative overflow-hidden border-2 border-neutral-800 ${item.aspect} ${className}`}
       style={{ backgroundColor: item.colors[0] }}
     >
       <div
-        className="absolute left-[12%] top-[10%] h-[28%] w-[54%] border-2 border-black"
+        className="absolute left-[12%] top-[10%] h-[28%] w-[54%] border-2 border-neutral-950"
         style={{ backgroundColor: item.colors[1] }}
       />
       <div
-        className="absolute bottom-[12%] right-[10%] h-[38%] w-[34%] border-2 border-black"
+        className="absolute bottom-[12%] right-[10%] h-[38%] w-[34%] border-2 border-neutral-950"
         style={{ backgroundColor: item.colors[2] }}
       />
-      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between border-t-2 border-black bg-white px-3 py-2">
-        <span className="text-xs font-black uppercase text-black">
+      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between border-t-2 border-neutral-950 bg-neutral-950 px-3 py-2">
+        <span className="text-xs font-black uppercase text-neutral-100">
           {item.category}
         </span>
         <span className="h-3 w-8 bg-yellow-400" />
@@ -115,14 +115,14 @@ export function ImageCard({ item }: { item: ImageItem }) {
         <PlaceholderImage item={item} />
         <div className="mt-3 flex items-start justify-between gap-3">
           <div>
-            <h3 className="text-base font-black leading-tight text-black">
+            <h3 className="text-base font-black leading-tight text-neutral-100">
               {item.title}
             </h3>
-            <p className="mt-1 text-sm font-semibold text-neutral-600">
+            <p className="mt-1 text-sm font-semibold text-neutral-400">
               {item.creator}
             </p>
           </div>
-          <span className="border-2 border-black bg-white px-2 py-1 text-xs font-black uppercase group-hover:bg-yellow-400">
+          <span className="border-2 border-neutral-700 bg-neutral-950 px-2 py-1 text-xs font-black uppercase text-neutral-100 group-hover:border-yellow-400 group-hover:bg-yellow-400 group-hover:text-black">
             Save
           </span>
         </div>
@@ -149,9 +149,9 @@ export function StatBlock({
   value: string;
 }) {
   return (
-    <div className="border-2 border-black bg-white p-4">
-      <p className="text-2xl font-black text-black">{value}</p>
-      <p className="mt-1 text-xs font-black uppercase text-neutral-500">
+    <div className="border-2 border-neutral-700 bg-neutral-900 p-4">
+      <p className="text-2xl font-black text-neutral-100">{value}</p>
+      <p className="mt-1 text-xs font-black uppercase text-neutral-400">
         {label}
       </p>
     </div>
