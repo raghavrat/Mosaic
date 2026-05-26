@@ -24,10 +24,13 @@ export function SiteHeader({ compact = false }: { compact?: boolean }) {
       <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-6">
         <Link
           href="/"
-          className="flex size-11 shrink-0 items-center justify-center border-2 border-neutral-100 bg-neutral-950 text-neutral-100 transition hover:bg-yellow-400 hover:text-black"
+          className="flex h-11 shrink-0 items-center gap-2 border-2 border-neutral-100 bg-neutral-950 px-2.5 text-neutral-100 transition hover:bg-yellow-400 hover:text-black"
           aria-label="Mosaic home"
         >
-          <MosaicLogo className="size-8" />
+          <MosaicLogo className="size-7" />
+          <span className="font-[var(--font-inter)] text-lg font-medium leading-none">
+            Mosaic
+          </span>
         </Link>
         <nav className="hidden items-center gap-1 text-sm font-bold uppercase sm:flex">
           <Link className="box-link" href="/explore">
