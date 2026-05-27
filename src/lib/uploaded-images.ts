@@ -19,6 +19,8 @@ type UploadedImageDocument = {
   objectName?: string;
   contentType?: string;
   size?: number;
+  width?: number | null;
+  height?: number | null;
   status?: string;
   saves?: string;
   views?: string;
@@ -46,6 +48,9 @@ function toImageItem(
     tags: Array.isArray(data.tags) ? data.tags : ["uploaded"],
     imageUrl,
     objectName: data.objectName,
+    width: typeof data.width === "number" && data.width > 0 ? data.width : undefined,
+    height:
+      typeof data.height === "number" && data.height > 0 ? data.height : undefined,
   };
 }
 

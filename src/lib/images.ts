@@ -11,6 +11,8 @@ export type ImageItem = {
   tags: string[];
   imageUrl?: string;
   objectName?: string;
+  width?: number;
+  height?: number;
 };
 
 export const topicFilters = [

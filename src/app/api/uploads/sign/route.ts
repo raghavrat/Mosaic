@@ -12,6 +12,8 @@ type SignUploadBody = {
   category?: string;
   description?: string;
   tags?: string;
+  width?: number;
+  height?: number;
 };
 
 function cleanTags(tags: string | undefined) {
@@ -51,6 +53,21 @@ export async function POST(request: Request) {
       );
     }
 
+    const width = Math.round(Number(body.width ?? 0));
+    const height = Math.round(Number(body.height ?? 0));
+
+    if (
+      !Number.isFinite(width) ||
+      !Number.isFinite(height) ||
+      width <= 0 ||
+      height <= 0
+    ) {
+      return Response.json(
+        { error: "Image dimensions are required." },
+        { status: 400 },
+      );
+    }
+
     const signedUpload = await createUploadSignedUrl({
       contentType,
       fileName,
@@ -59,6 +76,8 @@ export async function POST(request: Request) {
         category,
         description,
         tags: cleanTags(body.tags),
+        width,
+        height,
       },
       size,
     });

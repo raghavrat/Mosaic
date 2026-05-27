@@ -1,11 +1,9 @@
 import Link from "next/link";
-import { imageItems } from "@/lib/images";
 import { getUploadedImages } from "@/lib/uploaded-images";
 import { MasonryGrid, SiteHeader, TopicChips } from "@/components/site-ui";
 
 export default async function ExplorePage() {
-  const uploadedImages = await getUploadedImages();
-  const items = [...uploadedImages, ...imageItems];
+  const items = await getUploadedImages();
 
   return (
     <main className="min-h-screen bg-neutral-950 text-neutral-100">

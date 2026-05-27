@@ -67,6 +67,9 @@ export async function POST(request: Request) {
 
     const custom = (metadata.metadata ?? {}) as Record<string, string | undefined>;
 
+    const width = Number(custom.width ?? 0);
+    const height = Number(custom.height ?? 0);
+
     await getAdminFirestore()
       .collection("images")
       .doc(id)
@@ -82,6 +85,8 @@ export async function POST(request: Request) {
           objectName,
           contentType,
           size: Number(metadata.size ?? 0),
+          width: Number.isFinite(width) && width > 0 ? width : null,
+          height: Number.isFinite(height) && height > 0 ? height : null,
           ownerId: textOrDefault(custom["owner-id"], "anonymous"),
           status: "ready",
           saves: "0",

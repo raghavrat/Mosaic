@@ -26,6 +26,22 @@ async function readError(response: Response) {
   }
 }
 
+function readImageDimensions(file: File) {
+  return new Promise<{ width: number; height: number }>((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const image = new Image();
+    image.onload = () => {
+      URL.revokeObjectURL(url);
+      resolve({ width: image.naturalWidth, height: image.naturalHeight });
+    };
+    image.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error("Could not read image dimensions."));
+    };
+    image.src = url;
+  });
+}
+
 export function UploadPanel({
   expanded = false,
   onClose,
@@ -44,6 +60,19 @@ export function UploadPanel({
       return;
     }
 
+    setStatus({ type: "uploading", message: "Reading image" });
+
+    let dimensions: { width: number; height: number };
+    try {
+      dimensions = await readImageDimensions(file);
+    } catch (error) {
+      setStatus({
+        type: "error",
+        message: error instanceof Error ? error.message : "Could not read image.",
+      });
+      return;
+    }
+
     setStatus({ type: "uploading", message: "Creating upload URL" });
 
     const signResponse = await fetch("/api/uploads/sign", {
@@ -57,6 +86,8 @@ export function UploadPanel({
         category: formData.get("category"),
         description: formData.get("description"),
         tags: formData.get("tags"),
+        width: dimensions.width,
+        height: dimensions.height,
       }),
     });
 

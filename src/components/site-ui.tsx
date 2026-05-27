@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { ImageItem } from "@/lib/images";
 import { topicFilters } from "@/lib/images";
-import { UploadPopover } from "./upload-popover";
 
 export function MosaicLogo({ className = "" }: { className?: string }) {
   return (
@@ -57,7 +56,13 @@ export function SiteHeader({ compact = false }: { compact?: boolean }) {
         >
           Login
         </Link>
-        <UploadPopover />
+        <Link
+          href="/upload"
+          aria-label="Upload image"
+          className="flex size-10 items-center justify-center border-2 border-neutral-100 bg-neutral-950 text-2xl font-black leading-none text-neutral-100 transition hover:border-yellow-400 hover:bg-yellow-400 hover:text-black"
+        >
+          +
+        </Link>
       </div>
     </header>
   );
@@ -92,8 +97,15 @@ export function PlaceholderImage({
 }) {
   return (
     <div
-      className={`relative overflow-hidden border-2 border-neutral-800 ${item.aspect} ${className}`}
-      style={{ backgroundColor: item.colors[0] }}
+      className={`relative overflow-hidden border-2 border-neutral-800 ${
+        item.width && item.height ? "" : item.aspect
+      } ${className}`}
+      style={{
+        backgroundColor: item.colors[0],
+        ...(item.width && item.height
+          ? { aspectRatio: `${item.width} / ${item.height}` }
+          : null),
+      }}
     >
       {item.imageUrl ? (
         // eslint-disable-next-line @next/next/no-img-element

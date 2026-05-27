@@ -1,10 +1,9 @@
-import { imageItems } from "@/lib/images";
 import { getUploadedImages } from "@/lib/uploaded-images";
 import { MasonryGrid, SiteHeader, TopicChips } from "@/components/site-ui";
 
 export default async function SearchPage() {
   const uploadedImages = await getUploadedImages();
-  const results = [...uploadedImages, ...imageItems].filter((item) =>
+  const results = uploadedImages.filter((item) =>
     ["Editorial", "Interiors", "Street", "Objects"].includes(item.category),
   );
 

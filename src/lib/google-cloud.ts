@@ -9,6 +9,8 @@ export type UploadMetadataInput = {
   category: string;
   description: string;
   tags: string[];
+  width: number;
+  height: number;
 };
 
 const imageContentTypes = new Map([
@@ -84,6 +86,8 @@ export function encodeUploadMetadata(metadata: UploadMetadataInput) {
     "x-goog-meta-category": metadata.category,
     "x-goog-meta-tags": metadata.tags.join(","),
     "x-goog-meta-owner-id": "anonymous",
+    "x-goog-meta-width": String(metadata.width),
+    "x-goog-meta-height": String(metadata.height),
   };
 
   if (metadata.description) {

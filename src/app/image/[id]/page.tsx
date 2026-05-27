@@ -28,49 +28,51 @@ export default async function ImagePage({ params }: PageProps<"/image/[id]">) {
       <SiteHeader compact />
       <section className="mx-auto grid max-w-7xl gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[minmax(0,1.15fr)_0.85fr]">
         <div>
-          <PlaceholderImage item={item} className="min-h-[520px]" />
+          <PlaceholderImage item={item} />
         </div>
 
-        <aside className="border-2 border-neutral-700 bg-neutral-900 p-5">
-          <p className="mb-3 inline-flex bg-yellow-400 px-2 py-1 text-xs font-black uppercase text-black">
-            {item.category}
-          </p>
-          <h1 className="text-4xl font-black leading-none sm:text-5xl">
-            {item.title}
-          </h1>
-          <p className="mt-3 text-lg font-bold text-neutral-400">
-            by {item.creator}
-          </p>
-          <p className="mt-5 font-semibold leading-8 text-neutral-300">
-            {item.description}
-          </p>
+        <aside className="border-2 border-neutral-700 bg-neutral-900 p-5 lg:relative lg:p-0">
+          <div className="lg:absolute lg:inset-0 lg:overflow-y-auto lg:p-5">
+            <p className="mb-3 inline-flex bg-yellow-400 px-2 py-1 text-xs font-black uppercase text-black">
+              {item.category}
+            </p>
+            <h1 className="text-4xl font-black leading-none sm:text-5xl">
+              {item.title}
+            </h1>
+            <p className="mt-3 text-lg font-bold text-neutral-400">
+              by {item.creator}
+            </p>
+            <p className="mt-5 font-semibold leading-8 text-neutral-300">
+              {item.description}
+            </p>
 
-          <div className="mt-6 grid grid-cols-2 gap-3">
-            <StatBlock label="Saves" value={item.saves} />
-            <StatBlock label="Views" value={item.views} />
-          </div>
+            <div className="mt-6 grid grid-cols-2 gap-3">
+              <StatBlock label="Saves" value={item.saves} />
+              <StatBlock label="Views" value={item.views} />
+            </div>
 
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <button className="border-2 border-yellow-400 bg-yellow-400 px-5 py-4 text-sm font-black uppercase text-black hover:bg-neutral-950 hover:text-yellow-300">
-              Save Image
-            </button>
-            <Link
-              href="/explore"
-              className="border-2 border-neutral-700 bg-neutral-950 px-5 py-4 text-center text-sm font-black uppercase text-neutral-100 hover:border-yellow-400"
-            >
-              Back to Explore
-            </Link>
-          </div>
-
-          <div className="mt-6 flex flex-wrap gap-2">
-            {item.tags.map((tag) => (
-              <span
-                key={tag}
-                className="border-2 border-neutral-700 bg-neutral-950 px-3 py-2 text-xs font-black uppercase text-neutral-100"
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <button className="border-2 border-yellow-400 bg-yellow-400 px-5 py-4 text-sm font-black uppercase text-black hover:bg-neutral-950 hover:text-yellow-300">
+                Save Image
+              </button>
+              <Link
+                href="/explore"
+                className="border-2 border-neutral-700 bg-neutral-950 px-5 py-4 text-center text-sm font-black uppercase text-neutral-100 hover:border-yellow-400"
               >
-                {tag}
-              </span>
-            ))}
+                Back to Explore
+              </Link>
+            </div>
+
+            <div className="mt-6 flex flex-wrap gap-2">
+              {item.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="border-2 border-neutral-700 bg-neutral-950 px-3 py-2 text-xs font-black uppercase text-neutral-100"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
         </aside>
       </section>
