@@ -35,12 +35,10 @@ function toImageItem(
 ): ImageItem {
   return {
     id: data.id ?? docId,
-    title: data.title?.trim() || "Uploaded Image",
+    title: data.title?.trim() || "Untitled",
     creator: data.creator?.trim() || "Anonymous",
     category: data.category?.trim() || "Objects",
-    description:
-      data.description?.trim() ||
-      "A privately uploaded visual reference stored in Google Cloud Storage.",
+    description: data.description?.trim() ?? "",
     colors: fallbackColors,
     aspect: "aspect-[4/5]",
     saves: data.saves ?? "0",

@@ -27,11 +27,13 @@ export async function POST(request: Request) {
     const body = (await request.json()) as SignUploadBody;
     const contentType = body.contentType ?? "";
     const size = Number(body.size ?? 0);
-    const title = body.title?.trim() || "Uploaded Image";
+    const fileName = body.fileName?.trim() ?? "";
     const category = body.category?.trim() || "Objects";
-    const description = body.description?.trim() || "";
+    const description = body.description?.trim() ?? "";
+    const title =
+      body.title?.trim() || fileName.replace(/\.[^.]+$/, "") || "Untitled";
 
-    if (!body.fileName?.trim()) {
+    if (!fileName) {
       return Response.json({ error: "A file name is required." }, { status: 400 });
     }
 
@@ -51,7 +53,7 @@ export async function POST(request: Request) {
 
     const signedUpload = await createUploadSignedUrl({
       contentType,
-      fileName: body.fileName,
+      fileName,
       metadata: {
         title,
         category,

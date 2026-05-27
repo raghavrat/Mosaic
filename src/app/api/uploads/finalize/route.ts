@@ -73,13 +73,10 @@ export async function POST(request: Request) {
       .set(
         {
           id,
-          title: textOrDefault(custom.title, "Uploaded Image"),
+          title: custom.title?.trim() ?? "",
           creator: "Anonymous",
           category: textOrDefault(custom.category, "Objects"),
-          description: textOrDefault(
-            custom.description,
-            "A privately uploaded visual reference stored in Google Cloud Storage.",
-          ),
+          description: custom.description?.trim() ?? "",
           tags: splitTags(custom.tags),
           bucket: metadata.bucket,
           objectName,

@@ -79,13 +79,18 @@ export function getAdminFirestore() {
 }
 
 export function encodeUploadMetadata(metadata: UploadMetadataInput) {
-  return {
+  const headers: Record<string, string> = {
     "x-goog-meta-title": metadata.title,
     "x-goog-meta-category": metadata.category,
-    "x-goog-meta-description": metadata.description,
     "x-goog-meta-tags": metadata.tags.join(","),
     "x-goog-meta-owner-id": "anonymous",
   };
+
+  if (metadata.description) {
+    headers["x-goog-meta-description"] = metadata.description;
+  }
+
+  return headers;
 }
 
 export async function createUploadSignedUrl({
