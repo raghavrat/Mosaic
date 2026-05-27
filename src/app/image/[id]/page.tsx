@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { getImageById, getRelatedImages, imageItems } from "@/lib/images";
+import { notFound } from "next/navigation";
+import { getRelatedImages, getSeedImageById, imageItems } from "@/lib/images";
+import { getUploadedImageById } from "@/lib/uploaded-images";
 import {
   MasonryGrid,
   PlaceholderImage,
@@ -13,7 +15,12 @@ export async function generateStaticParams() {
 
 export default async function ImagePage({ params }: PageProps<"/image/[id]">) {
   const { id } = await params;
-  const item = getImageById(id);
+  const item = getSeedImageById(id) ?? (await getUploadedImageById(id));
+
+  if (!item) {
+    notFound();
+  }
+
   const related = getRelatedImages(item.id);
 
   return (

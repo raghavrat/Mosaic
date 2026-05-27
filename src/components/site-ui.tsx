@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ImageItem } from "@/lib/images";
 import { topicFilters } from "@/lib/images";
+import { UploadPopover } from "./upload-popover";
 
 export function MosaicLogo({ className = "" }: { className?: string }) {
   return (
@@ -28,7 +29,7 @@ export function SiteHeader({ compact = false }: { compact?: boolean }) {
           aria-label="Mosaic home"
         >
           <MosaicLogo className="size-7" />
-          <span className="font-[var(--font-inter)] text-lg font-medium leading-none">
+          <span className="text-lg font-medium leading-none">
             Mosaic
           </span>
         </Link>
@@ -56,6 +57,7 @@ export function SiteHeader({ compact = false }: { compact?: boolean }) {
         >
           Login
         </Link>
+        <UploadPopover />
       </div>
     </header>
   );
@@ -93,14 +95,25 @@ export function PlaceholderImage({
       className={`relative overflow-hidden border-2 border-neutral-800 ${item.aspect} ${className}`}
       style={{ backgroundColor: item.colors[0] }}
     >
-      <div
-        className="absolute left-[12%] top-[10%] h-[28%] w-[54%] border-2 border-neutral-950"
-        style={{ backgroundColor: item.colors[1] }}
-      />
-      <div
-        className="absolute bottom-[12%] right-[10%] h-[38%] w-[34%] border-2 border-neutral-950"
-        style={{ backgroundColor: item.colors[2] }}
-      />
+      {item.imageUrl ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={item.imageUrl}
+          alt={item.title}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      ) : (
+        <>
+          <div
+            className="absolute left-[12%] top-[10%] h-[28%] w-[54%] border-2 border-neutral-950"
+            style={{ backgroundColor: item.colors[1] }}
+          />
+          <div
+            className="absolute bottom-[12%] right-[10%] h-[38%] w-[34%] border-2 border-neutral-950"
+            style={{ backgroundColor: item.colors[2] }}
+          />
+        </>
+      )}
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between border-t-2 border-neutral-950 bg-neutral-950 px-3 py-2">
         <span className="text-xs font-black uppercase text-neutral-100">
           {item.category}

@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/functions/node_modules
 /.pnp
 .pnp.*
 .yarn/*
@@ -19,7 +20,7 @@
 
 # production
 /build
-
+/src/key
 # misc
 .DS_Store
 *.pem
@@ -39,3 +40,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+/functions/lib

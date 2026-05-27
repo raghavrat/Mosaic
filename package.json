@@ -6,10 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "functions:build": "npm --prefix functions run build",
+    "functions:lint": "npm --prefix functions run lint"
   },
   "dependencies": {
+    "@google-cloud/storage": "^7.19.0",
     "codex": "^0.2.3",
+    "firebase-admin": "^13.10.0",
     "next": "16.2.6",
     "react": "19.2.4",
     "react-dom": "19.2.4"

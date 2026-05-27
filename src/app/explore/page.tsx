@@ -1,8 +1,12 @@
 import Link from "next/link";
 import { imageItems } from "@/lib/images";
+import { getUploadedImages } from "@/lib/uploaded-images";
 import { MasonryGrid, SiteHeader, TopicChips } from "@/components/site-ui";
 
-export default function ExplorePage() {
+export default async function ExplorePage() {
+  const uploadedImages = await getUploadedImages();
+  const items = [...uploadedImages, ...imageItems];
+
   return (
     <main className="min-h-screen bg-neutral-950 text-neutral-100">
       <SiteHeader />
@@ -25,7 +29,7 @@ export default function ExplorePage() {
         </div>
         <TopicChips active="Editorial" />
         <div className="mt-6">
-          <MasonryGrid items={imageItems} />
+          <MasonryGrid items={items} />
         </div>
       </section>
     </main>

@@ -9,6 +9,8 @@ export type ImageItem = {
   saves: string;
   views: string;
   tags: string[];
+  imageUrl?: string;
+  objectName?: string;
 };
 
 export const topicFilters = [
@@ -181,8 +183,12 @@ export const imageItems: ImageItem[] = [
   },
 ];
 
+export function getSeedImageById(id: string) {
+  return imageItems.find((item) => item.id === id);
+}
+
 export function getImageById(id: string) {
-  return imageItems.find((item) => item.id === id) ?? imageItems[0];
+  return getSeedImageById(id) ?? imageItems[0];
 }
 
 export function getRelatedImages(id: string) {
